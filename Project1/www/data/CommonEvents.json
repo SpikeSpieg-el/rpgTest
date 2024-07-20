@@ -1,0 +1,7 @@
+[
+null,
+{"id":1,"list":[{"code":122,"indent":0,"parameters":[1,20,0,3,7,3,0]},{"code":301,"indent":0,"parameters":[2,0,false,false]},{"code":0,"indent":0,"parameters":[]}],"name":"бой за шаги","switchId":1,"trigger":1},
+{"id":2,"list":[{"code":318,"indent":0,"parameters":[0,6,1,16]},{"code":101,"indent":0,"parameters":["Monster",5,0,1]},{"code":401,"indent":0,"parameters":["В ващем распарежении, госпожа Лилит!"]},{"code":129,"indent":0,"parameters":[7,0,false]},{"code":111,"indent":0,"parameters":[4,7,6,1]},{"code":129,"indent":1,"parameters":[7,1,false]},{"code":318,"indent":1,"parameters":[0,6,0,16]},{"code":0,"indent":1,"parameters":[]},{"code":412,"indent":0,"parameters":[]},{"code":111,"indent":0,"parameters":[4,6,6,1]},{"code":129,"indent":1,"parameters":[7,1,false]},{"code":318,"indent":1,"parameters":[0,6,0,16]},{"code":0,"indent":1,"parameters":[]},{"code":412,"indent":0,"parameters":[]},{"code":0,"indent":0,"parameters":[]}],"name":"Призыв мертвого","switchId":1,"trigger":0},
+{"id":3,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0},
+{"id":4,"list":[{"code":0,"indent":0,"parameters":[]}],"name":"","switchId":1,"trigger":0}
+]
