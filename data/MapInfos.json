@@ -1,10 +1,20 @@
 [
 null,
-{"id":1,"expanded":true,"name":"MAP001","order":1,"parentId":0,"scrollX":720.8888888888889,"scrollY":399.1111111111111},
-{"id":2,"expanded":true,"name":"подземелье","order":2,"parentId":1,"scrollX":899.3333333333334,"scrollY":700.6666666666666},
-{"id":3,"expanded":false,"name":"Летающий храм","order":3,"parentId":2,"scrollX":899.3333333333334,"scrollY":1140.6666666666667},
-{"id":4,"expanded":false,"name":"Магазин","order":4,"parentId":0,"scrollX":540.6666666666666,"scrollY":415.3333333333333},
+{"id":1,"expanded":true,"name":"MAP001","order":1,"parentId":0,"scrollX":720.8,"scrollY":399.2},
+{"id":2,"expanded":true,"name":"подземелье","order":2,"parentId":1,"scrollX":791.2,"scrollY":700.8},
+{"id":3,"expanded":false,"name":"Летающий храм","order":3,"parentId":2,"scrollX":791.2,"scrollY":1080.8},
+{"id":4,"expanded":false,"name":"Магазин","order":4,"parentId":0,"scrollX":655.2,"scrollY":365.6},
 {"id":5,"expanded":true,"name":"подземелье2","order":5,"parentId":0,"scrollX":918.6666666666666,"scrollY":1571.3333333333333},
 {"id":6,"expanded":false,"name":"MAP006","order":6,"parentId":0,"scrollX":540.6666666666666,"scrollY":304.6666666666667},
-{"id":7,"expanded":true,"name":"MAP007","order":7,"parentId":0,"scrollX":1216.5,"scrollY":685.5}
+{"id":7,"expanded":true,"name":"MAP007","order":7,"parentId":0,"scrollX":1216.5,"scrollY":685.5},
+{"id":8,"expanded":false,"name":"рандом мапа","order":8,"parentId":0,"scrollX":728,"scrollY":406.22222222222223},
+{"id":9,"expanded":false,"name":"MAP009","order":9,"parentId":0,"scrollX":655.2,"scrollY":359.2},
+{"id":10,"expanded":true,"name":"лока рандом","order":10,"parentId":0,"scrollX":648.8,"scrollY":546.4},
+{"id":11,"expanded":false,"name":"лока магазин","order":11,"parentId":10,"scrollX":832,"scrollY":640},
+{"id":12,"expanded":true,"name":"лока битва","order":12,"parentId":10,"scrollX":648.8,"scrollY":562.4},
+{"id":13,"expanded":false,"name":"лока сундук","order":13,"parentId":10,"scrollX":648.8,"scrollY":546.4},
+{"id":14,"expanded":false,"name":"лока прокачка","order":14,"parentId":10,"scrollX":648.8,"scrollY":530.4},
+{"id":15,"expanded":true,"name":"лока битва2","order":15,"parentId":10,"scrollX":648.8,"scrollY":562.4},
+{"id":16,"expanded":true,"name":"лока битва3","order":16,"parentId":15,"scrollX":648.8,"scrollY":594.4},
+{"id":17,"expanded":true,"name":"босс","order":17,"parentId":15,"scrollX":648.8,"scrollY":562.4}
 ]
