@@ -5,5 +5,7 @@ null,
 {"id":3,"list":[{"code":122,"indent":0,"parameters":[1,1,0,0,1]},{"code":101,"indent":0,"parameters":["",0,0,2]},{"code":401,"indent":0,"parameters":["открыто"]},{"code":0,"indent":0,"parameters":[]}],"name":"Открыть проход","switchId":2,"trigger":0},
 {"id":4,"list":[{"code":121,"indent":0,"parameters":[4,4,0]},{"code":0,"indent":0,"parameters":[]}],"name":"сундук открыт","switchId":4,"trigger":0},
 {"id":5,"list":[{"code":355,"indent":0,"parameters":["// Вызываем функцию выбора путей"]},{"code":655,"indent":0,"parameters":["requestPathSelection();"]},{"code":0,"indent":0,"parameters":[]}],"name":"выбор","switchId":1,"trigger":0},
-{"id":6,"list":[{"code":355,"indent":0,"parameters":["requestLoot();"]},{"code":0,"indent":0,"parameters":[]}],"name":"Лутаем","switchId":1,"trigger":0}
+{"id":6,"list":[{"code":355,"indent":0,"parameters":["requestLoot();"]},{"code":0,"indent":0,"parameters":[]}],"name":"Лутаем","switchId":1,"trigger":0},
+{"id":7,"list":[{"code":356,"indent":0,"parameters":["LevelUpEvent 0 random"]},{"code":0,"indent":0,"parameters":[]}],"name":"Прокачка","switchId":1,"trigger":0},
+{"id":8,"list":[{"code":121,"indent":0,"parameters":[6,6,0]},{"code":0,"indent":0,"parameters":[]}],"name":"активная прокачка","switchId":1,"trigger":0}
 ]
