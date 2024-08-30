@@ -27,5 +27,19 @@
     <script type="text/javascript" src="js/rpg_windows.js"></script>
     <script type="text/javascript" src="js/plugins.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script>
+        bridge.send('VKWebAppShowBannerAd', {
+                banner_location: 'bottom'
+                })
+               .then((data) => { 
+                  if (data.result) {
+                    // Баннерная реклама отобразилась
+                  }
+                })
+                .catch((error) => {
+                  // Ошибка
+                  console.log(error);
+                });
+    </script>
 </body>
 </html>
