@@ -5,7 +5,7 @@
 PluginManager.setup($plugins);
 
 window.onload = function() {
-    // Подключение VK Bridge
+    // Инициализация vkBridge
     vkBridge.send('VKWebAppInit');
 
     // Подключение к событиям VK Bridge
