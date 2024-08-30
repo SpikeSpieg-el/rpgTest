@@ -32,6 +32,13 @@
  * @desc Список комнат в формате Название,Мин.КоличествоВыборов (Пример: Магазин,4)
  * @default ["Магазин,4"]
  *
+ * @param SingleUseRooms
+ * @text Комнаты одноразового использования
+ * @type text[]
+ * @desc Укажите список комнат, которые могут появиться только один раз (Пример: Босс,5,50)
+ * @default ["Босс,5,50"]
+ *
+ *
  * @help
  * Этот плагин позволяет создать случайные пути и комнаты. 
  * Можно вызвать создание путей и комнат по команде из событий или скриптов.
@@ -48,6 +55,8 @@
     const pathRoomCounts = String(parameters['PathRoomCounts'] || '4,4').split(',').map(Number);
     const defaultRoomWeight = Number(parameters['DefaultRoomWeight'] || 1);
     const minChoicesBeforeAllow = JSON.parse(parameters['MinChoicesBeforeAllow'] || '[]');
+    const singleUseRooms = JSON.parse(parameters['SingleUseRooms'] || '[]');
+    const roomCounterVariable = Number(parameters['RoomCounterVariable'] || 1);
 
     // Разбираем список комнат
     function parseRoomList(roomList) {
@@ -74,8 +83,10 @@
 
     const rooms = parseRoomList(roomList);
     const restrictedRooms = parseMinChoicesBeforeAllow(minChoicesBeforeAllow);
+    const singleUseRoomList = parseRoomList(singleUseRooms);
     let lastSelectedRooms = [];
     let totalChoicesMade = 0;
+    let usedSingleUseRooms = [];
 
     // Глобальная функция для создания случайных путей и комнат
     window.requestPathSelection = function() {
@@ -84,19 +95,23 @@
 
     // Функция для выбора случайной комнаты на основе весов с исключением предыдущих выборов и запрещенных комнат
     function getRandomRoom(excludeRooms = [], totalChoicesMade) {
-        const availableRooms = rooms.filter(room => {
-            const restriction = restrictedRooms.find(restriction => restriction.name === room.name);
-            if (restriction && totalChoicesMade < restriction.minChoices) {
-                return false;
-            }
-            return !excludeRooms.includes(room.name);
-        });
+        const availableRooms = rooms.concat(singleUseRoomList.filter(room => !usedSingleUseRooms.includes(room.name)))
+            .filter(room => {
+                const restriction = restrictedRooms.find(restriction => restriction.name === room.name);
+                if (restriction && totalChoicesMade < restriction.minChoices) {
+                    return false;
+                }
+                return !excludeRooms.includes(room.name);
+            });
 
         const totalWeight = availableRooms.reduce((sum, room) => sum + room.weight, 0);
         let random = Math.random() * totalWeight;
         for (const room of availableRooms) {
             random -= room.weight;
             if (random <= 0) {
+                if (singleUseRoomList.some(singleUseRoom => singleUseRoom.name === room.name)) {
+                    usedSingleUseRooms.push(room.name);
+                }
                 return room;
             }
         }
@@ -105,7 +120,7 @@
 
     // Создаем случайные пути и комнаты
     function createRandomPathsAndRooms() {
-        console.log(`Доступные комнаты: ${JSON.stringify(rooms)}`);
+        console.log(`Доступные комнаты: ${JSON.stringify(rooms.concat(singleUseRoomList.filter(room => !usedSingleUseRooms.includes(room.name))))}`);
 
         // Проверяем наличие достаточного количества комнат
         const totalRoomCount = pathRoomCounts.reduce((a, b) => a + b, 0);
@@ -137,8 +152,10 @@
         lastSelectedRooms = randomPathChoices.map(choice => choice.name);
         totalChoicesMade++;
 
-        // Показать выбор пути игроку
-        showPathChoice();
+        // Показать выбор пути игроку после следующего кадра
+        setTimeout(() => {
+            showPathChoice();
+        }, 0);
     }
 
     function showPathChoice() {
@@ -153,6 +170,7 @@
         $gameMessage.setChoiceCallback(index => {
             if (index >= 0 && index < $gameSystem.pathChoices.length) {
                 transferToRoom($gameSystem.pathChoices[index]);
+                incrementRoomCounter();
             } else {
                 console.error('Ошибка: Неверный выбор пути.');
             }
@@ -173,6 +191,11 @@
         }
     }
 
+    function incrementRoomCounter() {
+        const currentCount = $gameVariables.value(roomCounterVariable);
+        $gameVariables.setValue(roomCounterVariable, currentCount + 1);
+    }
+
     // Перехватываем завершение боя
     const _Scene_Battle_endBattle = Scene_Battle.prototype.endBattle;
     Scene_Battle.prototype.endBattle = function(result) {
@@ -180,4 +203,33 @@
         createRandomPathsAndRooms();
     };
 
+    // Создаем счетчик комнат и добавляем его на экран
+    const _Scene_Map_createDisplayObjects = Scene_Map.prototype.createDisplayObjects;
+    Scene_Map.prototype.createDisplayObjects = function() {
+        _Scene_Map_createDisplayObjects.call(this);
+        this.createRoomCounter();
+    };
+
+    Scene_Map.prototype.createRoomCounter = function() {
+        this._roomCounterSprite = new Sprite(new Bitmap(200, 50));
+        this._roomCounterSprite.bitmap.fontSize = 28;
+        this._roomCounterSprite.bitmap.textColor = '#FFFFFF';
+        this._roomCounterSprite.x = 10; // Позиция слева
+        this._roomCounterSprite.y = 10; // Позиция сверху
+        this.addChild(this._roomCounterSprite);
+    };
+
+    const _Scene_Map_update = Scene_Map.prototype.update;
+    Scene_Map.prototype.update = function() {
+        _Scene_Map_update.call(this);
+        this.updateRoomCounter();
+    };
+
+    Scene_Map.prototype.updateRoomCounter = function() {
+        const roomsCount = $gameVariables.value(roomCounterVariable);
+        this._roomCounterSprite.bitmap.clear();
+        this._roomCounterSprite.bitmap.drawText(`Комнат пройдено: ${roomsCount}`, 0, 0, 200, 50, 'left');
+    };
+
 })();
+

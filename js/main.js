@@ -26,4 +26,4 @@ window.onload = function() {
         .catch((error) => {
             console.error('Ошибка при инициализации VK Bridge:', error);
         });
-};
+}
