@@ -26,4 +26,16 @@ window.onload = function() {
         .catch((error) => {
             console.error('Ошибка при инициализации VK Bridge:', error);
         });
+        bridge.send('VKWebAppShowBannerAd', {
+            banner_location: 'bottom'
+            })
+           .then((data) => { 
+              if (data.result) {
+                // Баннерная реклама отобразилась
+              }
+            })
+            .catch((error) => {
+              // Ошибка
+              console.log(error);
+            });
 }
